@@ -1,0 +1,7 @@
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\bin\Debug\ConsumingData.exe.config
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\bin\Debug\ConsumingData.exe
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\bin\Debug\ConsumingData.pdb
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csprojAssemblyReference.cache
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csproj.CoreCompileInputs.cache
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.exe
+D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.pdb

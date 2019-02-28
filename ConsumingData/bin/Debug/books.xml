@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<books>
+  <book name="Harry Potter and the Philosopher's Stone" publisher="Махаон">
+    <theYearOfPublishing>2016</theYearOfPublishing>
+    <pages>432</pages>
+    <description>The eleven-year-old orphan boy Harry Potter lives in the family of his aunt and does not even suspect that he is a real wizard. But one day an owl arrives with a letter for him, and Harry Potter's life changes forever ...</description>
+  </book>
+  <book name="A Brief History of Time From the Big Bang to Black Holes" publisher="АСТ">
+    <theYearOfPublishing>2018</theYearOfPublishing>
+    <pages>232</pages>
+  </book>
+  <book name="C# 4.0: The Complete Reference" publisher="Вильямс">
+    <theYearOfPublishing>2019</theYearOfPublishing>
+    <pages>1058</pages>
+  </book>
+</books>
