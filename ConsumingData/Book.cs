@@ -4,18 +4,12 @@ using System.Runtime.Serialization;
 namespace ConsumingData
 {
     [Serializable]
-    [DataContract] //I use a serialization library that helps me convert objects to JSON
     public class Book
     {
-        [DataMember]
         public string Name { get; set; }
-        [DataMember]
         public string Publisher { get; set; }
-        [DataMember]
         public int TheYearOfPublishing { get; set; }
-        [DataMember]
         public int Pages { get; set; }
-        [DataMember]
         public string Description { get; set; }
 
         public Book(string name, string publisher, int theYearOfPublishing, int pages)

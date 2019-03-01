@@ -12,3 +12,7 @@ C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj
 C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csproj.CoreCompileInputs.cache
 C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.exe
 C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csproj.CopyComplete

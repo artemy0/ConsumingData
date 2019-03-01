@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Xml;
-using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace ConsumingData
 {
@@ -11,14 +10,9 @@ namespace ConsumingData
     {
         static void Main(string[] args)
         {
-            Book book1 = new Book("Harry Potter and the Philosopher's Stone", "Махаон", 2016, 432, 
+            Book book = new Book("Harry Potter and the Philosopher's Stone", "Machaon", 2016, 432,
                 "The eleven-year-old orphan boy Harry Potter lives in the family of his aunt and does not even suspect that he is a real wizard. But one day an owl arrives with a letter for him, and Harry Potter's life changes forever ...");
-            Book book2 = new Book("A Brief History of Time From the Big Bang to Black Holes", "АСТ", 2018, 232);
-            Book book3 = new Book("C# 4.0: The Complete Reference", "Вильямс", 2019, 1058);
 
-            //using the list collection to store books
-            List<Book> books = new List<Book>(); // class Library with (Book[] books + IEnumerable)
-            books.AddRange(new Book[] { book1, book2, book3 });
 
             while (true)
             {
@@ -34,121 +28,163 @@ namespace ConsumingData
 
                 switch (Console.ReadLine().ToLower())
                 {
-                    //Read and Write the JSON format is done using serialization
+                    //Read and Write the JSON format is done using Newtonsoft.Json namespace
                     case "1":
                     case "write object in json":
+                        Console.WriteLine();
+                        using (StreamWriter stream = new StreamWriter("book.json", false))
                         {
-                            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Book>));
-                            using (FileStream fs = new FileStream("books.json", FileMode.OpenOrCreate))
+                            StringBuilder sb = new StringBuilder();
+                            using (JsonWriter writer = new JsonTextWriter(new StringWriter(sb)))
                             {
-                                jsonFormatter.WriteObject(fs, books);
+                                writer.Formatting = Newtonsoft.Json.Formatting.Indented;
+
+                                writer.WriteStartObject();
+                                writer.WritePropertyName("Name");
+                                writer.WriteValue(book.Name);
+                                writer.WritePropertyName("Publisher");
+                                writer.WriteValue(book.Publisher);
+                                writer.WritePropertyName("TheYearOfPublishing");
+                                writer.WriteValue(book.TheYearOfPublishing);
+                                writer.WritePropertyName("Pages");
+                                writer.WriteValue(book.Pages);
+                                if (book.Description != null)
+                                {
+                                    writer.WritePropertyName("Description");
+                                    writer.WriteValue(book.Description);
+                                }
+                                writer.WriteEndObject();
                             }
 
-                            using (StreamReader sr = new StreamReader("books.json"))
-                            {
-                                Console.WriteLine("\n" + sr.ReadToEnd() + "\n");
-                            }
+                            Console.WriteLine(sb.ToString());
+                            stream.Write(sb.ToString());
                         }
+                        Console.WriteLine();
                         break;
 
                     case "2":
                     case "read object from json":
+                        Console.WriteLine();
+                        using (StreamReader stream = new StreamReader("book.json"))
                         {
-                            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Book>));
-                            using (FileStream fs = new FileStream("books.json", FileMode.OpenOrCreate))
+                            JsonTextReader reader = new JsonTextReader(new StringReader(stream.ReadToEnd()));
+                            while (reader.Read())
                             {
-                                books = (List<Book>)jsonFormatter.ReadObject(fs);
-
-                                PrintBooks(books);
+                                if (reader.Value != null)
+                                {
+                                    switch (reader.Value.ToString())
+                                    {
+                                        case "Name":
+                                            reader.Read();
+                                            if (reader.Value != null)
+                                                book.Name = reader.Value.ToString();
+                                            break;
+                                        case "Publisher":
+                                            reader.Read();
+                                            if (reader.Value != null)
+                                                book.Publisher = reader.Value.ToString();
+                                            break;
+                                        case "TheYearOfPublishing":
+                                            reader.Read();
+                                            if (reader.Value != null)
+                                                book.TheYearOfPublishing = Convert.ToInt32(reader.Value.ToString());
+                                            break;
+                                        case "Pages":
+                                            reader.Read();
+                                            if (reader.Value != null)
+                                                book.Pages = Convert.ToInt32(reader.Value.ToString());
+                                            break;
+                                        case "Description":
+                                            reader.Read();
+                                            if (reader.Value != null)
+                                                book.Description = reader.Value.ToString();
+                                            break;
+                                        default:
+                                            throw new Exception("developer unintended element");
+                                    }
+                                }
                             }
+                            book.PrintInfo();
                         }
+                        Console.WriteLine();
                         break;
 
-                    //It was also possible to implement using serialization, XmlWriter and XmlReader classes.
-                    //Creating an xml document file using the System.Xml.Linq namespace )
+                    //Creating an xml document file using the System.Xml namespace
                     case "3":
                     case "write object in xml":
+                        Console.WriteLine();
+                        using (StreamWriter stream = new StreamWriter("book.xml", false))
                         {
-                            XDocument xdoc = new XDocument();
-                            XElement xbooks = new XElement("books");
-                            foreach (var book in books)
+                            StringWriter sw = new StringWriter();
+                            using (XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings() { Indent = true }))
                             {
-                                XElement xbook = new XElement("book");
-                                XAttribute nameAttr = new XAttribute("name", book.Name);
-                                XAttribute publisherAttr = new XAttribute("publisher", book.Publisher);
-
-                                XElement theYearOfPublishingElem = new XElement("theYearOfPublishing", book.TheYearOfPublishing);
-                                XElement pagesElem = new XElement("pages", book.Pages);
-                                XElement descriptionElem = null;
+                                writer.WriteStartDocument();
+                                writer.WriteStartElement("book");
+                                writer.WriteAttributeString("name", book.Name);
+                                writer.WriteAttributeString("publisher", book.Publisher);
+                                writer.WriteElementString("theYearOfPublishing", book.TheYearOfPublishing.ToString());
+                                writer.WriteElementString("pages", book.Pages.ToString());
                                 if (book.Description != null)
-                                    descriptionElem = new XElement("description", book.Description);
+                                    writer.WriteElementString("description", book.Description);
+                                writer.WriteEndElement();
 
-                                xbook.Add(nameAttr);
-                                xbook.Add(publisherAttr);
-                                xbook.Add(theYearOfPublishingElem);
-                                xbook.Add(pagesElem);
-                                xbook.Add(descriptionElem);
-
-                                xbooks.Add(xbook);
+                                writer.Flush();
                             }
-                            xdoc.Add(xbooks);
 
-                            Console.WriteLine("\n" + xdoc + "\n");
-
-                            xdoc.Save("books.xml");
+                            Console.WriteLine(sw.ToString());
+                            stream.WriteLine(sw.ToString());
                         }
+                        Console.WriteLine();
                         break;
 
-                    //reading an xml document from a file using the System.Xml namespace and the XmlNode class
                     case "4":
                     case "read object from xml":
+                        Console.WriteLine();
+                        using (StreamReader stream = new StreamReader("book.xml"))
                         {
-                            books = new List<Book>();
                             XmlDocument xDoc = new XmlDocument();
-                            xDoc.Load("books.xml");
+                            xDoc.LoadXml(stream.ReadToEnd());
                             XmlElement xRoot = xDoc.DocumentElement;
-                            foreach (XmlElement xnode in xRoot)
+
+                            book = new Book();
+
+                            XmlNode attr = xRoot.Attributes.GetNamedItem("name");
+                            if (attr != null)
+                                book.Name = attr.Value;
+                            attr = xRoot.Attributes.GetNamedItem("publisher");
+                            if (attr != null)
+                                book.Publisher = attr.Value;
+
+                            foreach (XmlNode childnode in xRoot.ChildNodes)
                             {
-                                Book book = new Book();
+                                if (childnode.Name == "theYearOfPublishing")
+                                    book.TheYearOfPublishing = Convert.ToInt32(childnode.InnerText);
 
-                                XmlNode attr = xnode.Attributes.GetNamedItem("name");
-                                if (attr != null)
-                                    book.Name = attr.Value;
-                                attr = xnode.Attributes.GetNamedItem("publisher");
-                                if (attr != null)
-                                    book.Publisher = attr.Value;
+                                if (childnode.Name == "pages")
+                                    book.Pages = Convert.ToInt32(childnode.InnerText);
 
-                                foreach (XmlNode childnode in xnode.ChildNodes)
-                                {
-                                    if (childnode.Name == "theYearOfPublishing")
-                                        book.TheYearOfPublishing = Convert.ToInt32(childnode.InnerText);
-
-                                    if (childnode.Name == "pages")
-                                        book.Pages = Convert.ToInt32(childnode.InnerText);
-
-                                    if (childnode.Name == "description")
-                                        book.Description = childnode.InnerText;
-                                }
-                                books.Add(book);
+                                if (childnode.Name == "description")
+                                    book.Description = childnode.InnerText;
                             }
-
-                            PrintBooks(books);
+                            book.PrintInfo();
                         }
+                        Console.WriteLine();
                         break;
 
                     case "5":
                     case "display information about books":
-                        {
-                            PrintBooks(books);
-                        }
+                        Console.WriteLine();
+                        book.PrintInfo();
+                        Console.WriteLine();
                         break;
+
                     case "6":
                     case "content of json file":
                         {
                             Console.WriteLine();
                             try
                             {
-                                using (StreamReader sr = new StreamReader("books.json"))
+                                using (StreamReader sr = new StreamReader("book.json"))
                                 {
                                     Console.WriteLine(sr.ReadToEnd());
                                 }
@@ -160,13 +196,14 @@ namespace ConsumingData
                             Console.WriteLine();
                         }
                         break;
+
                     case "7":
                     case "content of xml file":
                         {
                             Console.WriteLine();
                             try
                             {
-                                using (StreamReader sr = new StreamReader("books.xml"))
+                                using (StreamReader sr = new StreamReader("book.xml"))
                                 {
                                     Console.WriteLine(sr.ReadToEnd());
                                 }
@@ -178,23 +215,18 @@ namespace ConsumingData
                             Console.WriteLine();
                         }
                         break;
+
                     case "8":
                     case "exit":
                         return;
+
                     default:
                         Console.WriteLine("\nSorry. Data entered incorrectly. Try again!\n");
                         break;
                 }
             }
         }
-        public static void PrintBooks(List<Book> books)
-        {
-            Console.WriteLine();
-            foreach (Book book in books)
-            {
-                book.PrintInfo();
-                Console.WriteLine();
-            }
-        }
     }
 }
+
+
