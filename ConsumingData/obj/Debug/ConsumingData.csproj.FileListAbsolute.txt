@@ -5,3 +5,10 @@ D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csprojA
 D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csproj.CoreCompileInputs.cache
 D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.exe
 D:\IBA\ConsumingData\ConsumingData\ConsumingData\obj\Debug\ConsumingData.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\ConsumingData.exe.config
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\ConsumingData.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\bin\Debug\ConsumingData.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csprojAssemblyReference.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.csproj.CoreCompileInputs.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\ConsumingData\ConsumingData\obj\Debug\ConsumingData.pdb
