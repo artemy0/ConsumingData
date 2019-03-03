@@ -82,12 +82,12 @@ namespace ConsumingData
 
                     case "6":
                     case "content of json file":
-                        DisplayFileContents("bool.json");
+                        DisplayFileContents("book.json");
                         break;
 
                     case "7":
                     case "content of xml file":
-                        DisplayFileContents("bool.xml");
+                        DisplayFileContents("book.xml");
                         break;
 
                     case "8":
