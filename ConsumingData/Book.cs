@@ -4,12 +4,18 @@ using System.Runtime.Serialization;
 namespace ConsumingData
 {
     [Serializable]
+    [DataContract]
     public class Book
     {
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public string Publisher { get; set; }
+        [DataMember]
         public int TheYearOfPublishing { get; set; }
+        [DataMember]
         public int Pages { get; set; }
+        [DataMember]
         public string Description { get; set; }
 
         public Book(string name, string publisher, int theYearOfPublishing, int pages)
@@ -36,6 +42,6 @@ namespace ConsumingData
                 return $"Title of the book: {Name}\nPublisher: {Publisher}\nThe year of publishing: {TheYearOfPublishing}\nNumber of pages: {Pages}\nDescription: {Description}";
         }
 
-        public void PrintInfo() => Console.WriteLine(GetInfo());
+        public void PrintInfo() => Console.WriteLine("\n" + GetInfo() + "\n");
     }
 }

@@ -1,0 +1,11 @@
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\ConsumingData.exe.config
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\ConsumingData.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\ConsumingData.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\obj\Debug\Serialization.csprojAssemblyReference.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\obj\Debug\Serialization.csproj.CoreCompileInputs.cache
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\obj\Debug\Serialization.csproj.CopyComplete
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\obj\Debug\ConsumingData.exe
+C:\Users\Artsem\OneDrive\Рабочий стол\Serialization\ConsumingData\obj\Debug\ConsumingData.pdb
